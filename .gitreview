@@ -1,0 +1,4 @@
+[gerrit]
+host =gerrit.deepblueai.com
+port =29418
+project =DC_DI_DataAssets_Pictureassets.git

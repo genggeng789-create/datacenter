@@ -1,0 +1,30 @@
+server:
+  port: ${L_PORT}
+spring:
+  application:
+    name: eureka-server
+
+## 单机版配置
+#eureka:
+#  client:
+#    fetch-registry: false  # 是否需要从Eureka获取注册信息
+#    register-with-eureka: false  # 是否需要把该服务注册到Eureka
+#    service-url: #暴露Eureka注册地址
+#      defaultZone: http://localhost:${server.port}/eureka
+
+# 集群版配置
+eureka:
+  client:
+    fetch-registry: true  # 是否需要从Eureka获取注册信息
+    register-with-eureka: true  # 是否需要把该服务注册到Eureka
+    service-url: #暴露Eureka注册地址
+      defaultZone: http://${IP}:${R_PORT}/eureka
+  instance:
+    prefer-ip-address: true  #优先使用该服务的IP地址注册到eureka，在生产环境建议改为true
+    lease-expiration-duration-in-seconds: 90
+    lease-renewal-interval-in-seconds: 30
+  server:
+    #修改扫描失效服务间隔时间()
+    eviction-interval-timer-in-ms: 5000
+    #取消自我保护机制
+    enable-self-preservation: false

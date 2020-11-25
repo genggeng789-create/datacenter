@@ -1,0 +1,52 @@
+server:
+  port: 8222
+spring:
+  application:
+    name: microservice-gateway
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://10.16.32.172:8888/eureka ,http://10.16.32.172:9999/eureka
+  instance:
+    prefer-ip-address: true
+
+#zuul的动态路由配置
+#zuul:          #如果path 和 serviceId完全一样，就不需要以下配置，直接使用
+#  routes:
+#    microservice-user:
+#      path:  /microservice-user   #需要转发的路径
+#      serviceId: microservice-user  #转发的微服务(名称)
+#    microservice-movie:
+#      path:  /microservice-movie   #需要转发的路径
+#      serviceId: microservice-movie  #转发的微服务(名称)
+#    microservice-movie:
+#      path:  /search-picture   #需要转发的路径
+#      serviceId: search-picture  #转发的微服务(名称)
+# 让zuul预定义的异常过滤器失效
+#zuul:
+#  SendErrorFilter:
+#    error:
+#      disable: true
+zuul:
+  add-host-header: true
+  ignore-security-headers: false
+  sensitive-headers:
+#keycloak:
+#  enabled: true
+#  realm: dev #客户端所属领域空间
+#  principal-attribute: preferred_username #security principal获取token中哪个参数的值
+#  cors: true #跨域设置
+#  cors-allowed-methods: POST,PUT,DELETE,GET,OPTIONS,PATCH #跨域设置
+#  cors-allowed-headers: Authorization, Origin, X-Requested-With, Content-Type #跨域设置
+#  bearer-only: true #只允许纯token验证方式，其他不支持
+#  auth-server-url: https://accounts-internal.deepblueai.com/auth #keycloak服务器地址
+#  ssl-required: external #根据外部访问协议启使用ssl验证
+#  resource: service-data-center # clientID
+#  public-client: false #是否公开客户端，公开客户端表示
+#  always-refresh-token: false #是否对每次请求都刷新访问令牌
+#  credentials:
+#    secret: cff9f832-ae41-4eb5-8678-4f18e0a086ee #客户端秘钥
+#  use-resource-role-mappings: true #如果设置为true，适配器将在访问令牌内部查找用户的客户端级角色映射。如果为false，它将查看用户角色映射的领域级别。可选项，默认值为false。
+#  token-minimum-time-to-live: 3600 #在一个token过期之前的多久（秒）时间提前通过keycloak服务器刷新token
