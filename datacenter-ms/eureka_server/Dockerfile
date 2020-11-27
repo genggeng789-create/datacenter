@@ -1,7 +1,6 @@
 FROM core.harbor.cz.shenlan.com/library/openjdk:8-jdk-alpine
 MAINTAINER quixmart
 ADD target/eureka_server.jar eureka_server.jar
-RUN apk add --update font-adobe-100dpi ttf-dejavu fontconfig
 RUN echo "Asia/Shanghai" >/etc/timezone
 RUN sh -c 'touch /eureka_server.jar'
 ENV JAVA_OPTS=""
