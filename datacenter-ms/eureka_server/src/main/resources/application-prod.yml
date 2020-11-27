@@ -1,6 +1,6 @@
 #生产环境###########################################################################################################################################
 server:
-  port: ${L_PORT}
+  port: 8888
 
 spring:
   application:
@@ -14,7 +14,7 @@ eureka:
     fetch-registry: true  # 是否需要从Eureka获取注册信息
     register-with-eureka: true  # 是否需要把该服务注册到Eureka
     service-url: #暴露Eureka注册地址
-      defaultZone: http://${IP}:${R_PORT}/eureka
+      defaultZone: http://${IP}:8888/eureka
   instance:
     prefer-ip-address: true  #优先使用该服务的IP地址注册到eureka，在生产环境建议改为true
     lease-expiration-duration-in-seconds: 90
