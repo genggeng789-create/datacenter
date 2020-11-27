@@ -11,7 +11,7 @@
 
     <artifactId>eureka_server</artifactId>
     <properties>
-        <dockerfile.tag>eureka</dockerfile.tag>
+        <dockerfile.tag>1.0</dockerfile.tag>
         <spring.profiles.active>dev</spring.profiles.active>
     </properties>
 
