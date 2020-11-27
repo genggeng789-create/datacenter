@@ -1,16 +1,12 @@
+#生产环境###########################################################################################################################################
 server:
   port: ${L_PORT}
+
 spring:
   application:
     name: eureka-server
-
-## 单机版配置
-#eureka:
-#  client:
-#    fetch-registry: false  # 是否需要从Eureka获取注册信息
-#    register-with-eureka: false  # 是否需要把该服务注册到Eureka
-#    service-url: #暴露Eureka注册地址
-#      defaultZone: http://localhost:${server.port}/eureka
+  profiles:
+    active: prod #生产环境
 
 # 集群版配置
 eureka:
@@ -27,4 +23,4 @@ eureka:
     #修改扫描失效服务间隔时间()
     eviction-interval-timer-in-ms: 5000
     #取消自我保护机制
-    enable-self-preservation: false
+    enable-self-preservation: true

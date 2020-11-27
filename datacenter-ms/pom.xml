@@ -11,7 +11,6 @@
     <modules>
         <module>microservice_user</module>
         <module>eureka_server</module>
-        <module>microservice_movie</module>
         <module>hystrix_monitor</module>
         <module>microservice_gateway</module>
         <module>microservice_search_picture</module>
@@ -72,14 +71,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <projetc.reporting.outputEncoding>UTF-8</projetc.reporting.outputEncoding>
         <version.jdk>1.8</version.jdk>
-
+        <docker.image.prefix>datacenter</docker.image.prefix>
         <version.spring.boot>2.1.8.RELEASE</version.spring.boot>
         <version.spring.cloud>Greenwich.SR1</version.spring.cloud>
         <version.keycloak>10.0.1</version.keycloak>
     </properties>
 
     <dependencies>
-
 
         <!--spring boot-->
         <dependency>

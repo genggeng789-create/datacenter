@@ -3,7 +3,8 @@ server:
 spring:
   application:
     name: oss-access
-
+  profiles:
+    active: dev
 oss:
   #endpoint: 10.16.138.27:80
   endpoint: oss-test.deepblueyun.com

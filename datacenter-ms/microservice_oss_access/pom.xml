@@ -77,12 +77,15 @@
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>0.4.13</version>
+                <version>1.0.0</version>
                 <configuration>
-                    <imageName>oss_access</imageName>
+                    <imageName>datacenter/oss_access</imageName>
+                    <imageTags>
+                        <imageTag>${project.version}</imageTag>
+                    </imageTags>
                     <baseImage>jdk1.8</baseImage>
                     <!--<entryPoint>["java", "-jar", "${project.build.finalName}.jar"]</entryPoint>-->
-                    <entryPoint>["sh", "-c", "java -jar /${project.build.finalName}.jar"]</entryPoint>
+                    <entryPoint>["sh", "-c", "java -jar /${project.build.finalName}.jar --spring.config.name=application-$CE"]</entryPoint>
                     <resources>
                         <resource>
                             <targetPath>/</targetPath>
