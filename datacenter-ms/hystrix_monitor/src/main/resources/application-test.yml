@@ -3,3 +3,5 @@ server:
 spring:
   application:
     name: hystrix-monitor
+  profiles:
+    active: test
