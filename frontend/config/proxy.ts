@@ -17,8 +17,7 @@ export default {
   },
   dev: {
     '/api': {
-      // target: 'https://dev-platform.dbpay.xin',
-      target: 'http://10.16.32.172:8222/',
+      target: 'http://test-dam.deepblueai.com/',
       changeOrigin: true,
       pathRewrite: {
         '^/api': '',
@@ -27,7 +26,16 @@ export default {
   },
   test: {
     '/api/': {
-      target: 'http://10.16.32.172:8222/',
+      target: 'http://test-dam.deepblueai.com/',
+      changeOrigin: true,
+      pathRewrite: {
+        '^': '',
+      },
+    },
+  },
+  uat: {
+    '/api/': {
+      target: 'http://uat-dam.deepblueai.com/',
       changeOrigin: true,
       pathRewrite: {
         '^': '',
@@ -36,7 +44,7 @@ export default {
   },
   pre: {
     '/api/': {
-      target: 'http://10.16.32.172:8222/',
+      target: 'http://dam.deepblueai.com/',
       changeOrigin: true,
       pathRewrite: {
         '^': '',
