@@ -37,7 +37,7 @@ feign:
 
 keycloak:
   enabled: true
-  realm: dev #客户端所属领域空间
+  realm: ${spring.profiles.active} #客户端所属领域空间
   principal-attribute: preferred_username #security principal获取token中哪个参数的值
   cors: true #跨域设置
   cors-allowed-methods: POST,PUT,DELETE,GET,OPTIONS,PATCH #跨域设置

@@ -1,27 +1,18 @@
 server:
-  port: 8086
+  port: 8085
+
 spring:
   application:
-    name: search-picture
+    name: quixmart
   profiles:
-    active: prod
-
-#elasticsearch
-elasticsearch:
-  schema: http
-  address: 10.16.32.70:9200,10.16.32.113:9200,10.16.32.114:9200
-  connectTimeout: 5000
-  socketTimeout: 5000
-  connectionRequestTimeout: 5000
-  maxConnectNum: 100
-  maxConnectPerRoute: 100
+    active: dev
 
 eureka:
   client:
     fetch-registry: true  #作为客户端需要从eureka获取信息
     register-with-eureka: true  #作为客户端注册到eureka
     service-url: #客户端注册地址
-      defaultZone: http://${IP1}:8888/eureka ,http://${IP2}:9999/eureka
+      defaultZone: http://10.16.32.172:8888/eureka ,http://10.16.32.172:9999/eureka
     registry-fetch-interval-seconds: 5
   instance:
     prefer-ip-address: true  #优先使用该服务的IP地址注册到eureka，在生产环境建议改为true
