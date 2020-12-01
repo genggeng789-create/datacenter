@@ -19,13 +19,13 @@ export function getKeycloakOptions() {
       realm = 'dev';
     } else if (hostStr.toLowerCase().startsWith('test-')) {
       url = 'https://accounts-internal.deepblueai.com/auth';
-      realm = 'dev';
+      realm = 'test';
     } else if (hostStr.toLowerCase().startsWith('uat-')) {
       url = 'https://accounts-internal.deepblueai.com/auth';
-      realm = 'dev';
+      realm = 'uat';
     } else {
       url = 'https://accounts-internal.deepblueai.com/auth';
-      realm = 'dev';
+      realm = 'prod';
     }
   }
   return {
