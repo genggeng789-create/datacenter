@@ -82,18 +82,18 @@ export const getAuthorityFromRouter = (router = [], pathname) => {
 // 获取对应环境前缀
 export function getUrl() {
   const hostStr = window.location.host;
-  let uriStr = 'http://test-dam.deepblueai.com/';
+  let uriStr = 'http://test-dam.deepblueai.com';
   if (hostStr) {
     if (hostStr.toLowerCase().startsWith('localhost')) {
-      uriStr = 'http://test-dam.deepblueai.com/';
+      uriStr = 'http://test-dam.deepblueai.com';
     } else if (hostStr.toLowerCase().startsWith('dev-')) {
-      uriStr = 'http://test-dam.deepblueai.com/';
+      uriStr = 'http://test-dam.deepblueai.com';
     } else if (hostStr.toLowerCase().startsWith('test-')) {
-      uriStr = 'http://test-dam.deepblueai.com/';
+      uriStr = 'http://test-dam.deepblueai.com';
     } else if (hostStr.toLowerCase().startsWith('uat-')) {
-      uriStr = 'http://uat-dam.deepblueai.com/';
+      uriStr = 'http://uat-dam.deepblueai.com';
     } else {
-      uriStr = 'https://';
+      uriStr = 'http://dam.deepblueai.com';
     }
   }
   return uriStr;
