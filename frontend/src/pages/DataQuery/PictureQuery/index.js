@@ -35,7 +35,9 @@ const PictureQuery = () => {
     // const imgarr = JSON.parse(arr)
     if (imgarr.length > 0) {
       imgarr.forEach((e, index) => {
-        imgarr[index] = `${getUrl()}/oss-access/download?fileName=${e}&&path=${record.path_md5}`;
+        imgarr[index] = `${getUrl()}/api/oss-access/download?fileName=${e}&&path=${
+          record.path_md5
+        }`;
       });
       setImgList(imgarr);
       setCurrentImg(imgarr[0]);
