@@ -5,7 +5,7 @@ import moment from 'moment';
 import { Cascader, message } from 'antd';
 import { getPicQueryList } from '@/services/dataQuery';
 import { markType, markClassArr, markTypeArr } from '@/utils/dataQuery';
-// import proxy from './proxy';
+import { getUrl } from '@/utils/utils';
 import ImgCard from './ImgCard';
 import styles from './index.less';
 
@@ -35,9 +35,7 @@ const PictureQuery = () => {
     // const imgarr = JSON.parse(arr)
     if (imgarr.length > 0) {
       imgarr.forEach((e, index) => {
-        imgarr[
-          index
-        ] = `http://10.16.32.172:8222/oss-access/download?fileName=${e}&&path=${record.path_md5}`;
+        imgarr[index] = `${getUrl()}/oss-access/download?fileName=${e}&&path=${record.path_md5}`;
       });
       setImgList(imgarr);
       setCurrentImg(imgarr[0]);
