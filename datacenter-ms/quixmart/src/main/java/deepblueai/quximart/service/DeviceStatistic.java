@@ -1,11 +1,13 @@
 package deepblueai.quximart.service;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import deepblueai.quximart.entity.ConsumerPurchaseRates;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import javax.sql.DataSource;
 
 public class DeviceStatistic {
     private String url = "jdbc:presto://10.16.32.113:8089/";
@@ -30,16 +32,32 @@ public class DeviceStatistic {
 
         //Statement接口
         Statement statement = connection.createStatement();
-        String sql1 = "SELECT * from hive.test.test1 WHERE name='庹明耀'";
+        String sql1 = "select * from quixmart_analysis.consumer_purchase_rates";
         ResultSet rs = statement.executeQuery(sql1);
         while (rs.next()) {
-            System.out.println(rs.getString("name"));
-            System.out.println(rs.getInt("age"));
+            System.out.println(rs.getString("merchant_id"));
+            System.out.println(rs.getDouble("rate_of_1st_within_0"));
         }
 
         //关闭连接
         rs.close();
         statement.close();
         connection.close();
+    }
+
+    @Autowired
+    DataSource dataSource;
+
+    public List<ConsumerPurchaseRates> QueryPurchaseRates() throws SQLException {
+        ArrayList<ConsumerPurchaseRates> list = new ArrayList<ConsumerPurchaseRates>();
+        Connection connection = dataSource.getConnection();
+        String sql = "select * from quixmart_analysis.consumer_purchase_rates";
+        PreparedStatement prepareStatement = connection.prepareStatement(sql);
+        ResultSet resultSet = prepareStatement.executeQuery();
+        while (resultSet.next()) {
+            String cityName = resultSet.getString("name");
+            System.out.println(cityName);
+        }
+        return list;
     }
 }
