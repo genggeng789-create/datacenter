@@ -1,129 +1,50 @@
 package deepblueai.quximart.entity;
 
 public class DashDeviceStatus {
-    String registerTime;
-    String merchantId;
-    String rateOf1stWithin0;
-    String rateOf1st;
-    String rateOf2ndWithin0;
-    String rateOf2ndWithin7;
-    String rateOf2ndWithin14;
-    String rateOf2ndwithin21;
-    String rateOf2nd;
-    int registerCount;
-    int ifFirst;
-    int ifSecond;
+    String deviceCode;
+    String problemStatus1;
+    String problemStatus2;
+    String problemStatus3;
 
-    public String getRegisterTime() {
-        return registerTime;
+    public String getDeviceCode() {
+        return deviceCode;
     }
 
-    public void setRegisterTime(String registerTime) {
-        this.registerTime = registerTime;
+    public void setDeviceCode(String deviceCode) {
+        this.deviceCode = deviceCode;
     }
 
-    public String getMerchantId() {
-        return merchantId;
+    public String getProblemStatus1() {
+        return problemStatus1;
     }
 
-    public void setMerchantId(String merchantId) {
-        this.merchantId = merchantId;
+    public void setProblemStatus1(String problemStatus1) {
+        this.problemStatus1 = problemStatus1;
     }
 
-    public String getRateOf1stWithin0() {
-        return rateOf1stWithin0;
+    public String getProblemStatus2() {
+        return problemStatus2;
     }
 
-    public void setRateOf1stWithin0(String rateOf1stWithin0) {
-        this.rateOf1stWithin0 = rateOf1stWithin0;
+    public void setProblemStatus2(String problemStatus2) {
+        this.problemStatus2 = problemStatus2;
     }
 
-    public String getRateOf1st() {
-        return rateOf1st;
+    public String getProblemStatus3() {
+        return problemStatus3;
     }
 
-    public void setRateOf1st(String rateOf1st) {
-        this.rateOf1st = rateOf1st;
-    }
-
-    public String getRateOf2ndWithin0() {
-        return rateOf2ndWithin0;
-    }
-
-    public void setRateOf2ndWithin0(String rateOf2ndWithin0) {
-        this.rateOf2ndWithin0 = rateOf2ndWithin0;
-    }
-
-    public String getRateOf2ndWithin7() {
-        return rateOf2ndWithin7;
-    }
-
-    public void setRateOf2ndWithin7(String rateOf2ndWithin7) {
-        this.rateOf2ndWithin7 = rateOf2ndWithin7;
-    }
-
-    public String getRateOf2ndWithin14() {
-        return rateOf2ndWithin14;
-    }
-
-    public void setRateOf2ndWithin14(String rateOf2ndWithin14) {
-        this.rateOf2ndWithin14 = rateOf2ndWithin14;
-    }
-
-    public String getRateOf2ndwithin21() {
-        return rateOf2ndwithin21;
-    }
-
-    public void setRateOf2ndwithin21(String rateOf2ndwithin21) {
-        this.rateOf2ndwithin21 = rateOf2ndwithin21;
-    }
-
-    public String getRateOf2nd() {
-        return rateOf2nd;
-    }
-
-    public void setRateOf2nd(String rateOf2nd) {
-        this.rateOf2nd = rateOf2nd;
-    }
-
-    public int getRegisterCount() {
-        return registerCount;
-    }
-
-    public void setRegisterCount(int registerCount) {
-        this.registerCount = registerCount;
-    }
-
-    public int getIfFirst() {
-        return ifFirst;
-    }
-
-    public void setIfFirst(int ifFirst) {
-        this.ifFirst = ifFirst;
-    }
-
-    public int getIfSecond() {
-        return ifSecond;
-    }
-
-    public void setIfSecond(int ifSecond) {
-        this.ifSecond = ifSecond;
+    public void setProblemStatus3(String problemStatus3) {
+        this.problemStatus3 = problemStatus3;
     }
 
     public String toJson() {
         return "{" +
-                "\"registerTime\":\"" + registerTime +"\"" +
-                ", \"merchantId\":\"" + merchantId + "\"" +
-                ", \"rateOf1stWithin0\":\"" + rateOf1stWithin0 +"\"" +
-                ", \"rateOf1st\":\"" + rateOf1st +"\"" +
-                ", \"rateOf2ndWithin0\":\"" + rateOf2ndWithin0 +"\"" +
-                ", \"rateOf2ndWithin7\":\"" + rateOf2ndWithin7 +"\"" +
-                ", \"rateOf2ndWithin14\":\"" + rateOf2ndWithin14 +"\"" +
-                ", \"rateOf2ndwithin21\":\"" + rateOf2ndwithin21 +"\"" +
-                ", \"rateOf2nd\":\"" + rateOf2nd +"\"" +
-                ", \"registerCount\":" + registerCount +
-                ", \"ifFirst\":" + ifFirst +
-                ", \"ifSecond\":" + ifSecond +
+                "deviceCode:\"" + deviceCode + '\"' +
+                ", problemStatus1:\"" + problemStatus1 + '\"' +
+                ", problemStatus2:\"" + problemStatus2 + '\"' +
+                ", problemStatus3:\"" + problemStatus3 + '\"' +
                 '}';
     }
+
 }

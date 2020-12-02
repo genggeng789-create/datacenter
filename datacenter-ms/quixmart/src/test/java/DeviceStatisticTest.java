@@ -13,13 +13,13 @@ public class DeviceStatisticTest {
 
     @Autowired
     private DeviceStatistic ds;
-
-    @Test
-    public void testConnectPresto2(){
-        try {
-            ds.testpresto2();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+//
+//    @Test
+//    public void testConnectPresto2(){
+//        try {
+//            ds.testpresto2();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
