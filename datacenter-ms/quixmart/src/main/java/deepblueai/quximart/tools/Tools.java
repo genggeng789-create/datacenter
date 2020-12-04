@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 
@@ -108,6 +109,13 @@ public class Tools {
             }
         }
         System.out.println(" download success");
+    }
+
+    public static String getLastDate()
+    {
+        Calendar ca = Calendar.getInstance();
+        ca.add(Calendar.DATE, -1);
+        return getStringDate(ca.getTime(),"yyyy-MM-dd");
     }
 
 }

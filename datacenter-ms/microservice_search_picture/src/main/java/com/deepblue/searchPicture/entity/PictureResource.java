@@ -61,7 +61,10 @@ public class PictureResource {
     }
 
     public String getPackage_name() {
-        return package_name;
+        if(!(package_name == null || package_name.equals("")))
+            return package_name;
+        else
+            return null;
     }
 
     public void setPackage_name(String package_name) {
@@ -69,7 +72,10 @@ public class PictureResource {
     }
 
     public String getPackage_md5() {
-        return package_md5;
+        if(!(package_md5 == null || package_md5.equals("")))
+            return package_md5;
+        else
+            return null;
     }
 
     public void setPackage_md5(String package_md5) {
@@ -77,7 +83,10 @@ public class PictureResource {
     }
 
     public String getPath() {
-        return path;
+        if(!(path == null || path.equals("")))
+            return path;
+        else
+            return null;
     }
 
     public void setPath(String path) {
@@ -85,7 +94,10 @@ public class PictureResource {
     }
 
     public String getPath_md5() {
-        return path_md5;
+        if(!(path_md5 == null || path_md5.equals("")))
+            return path_md5;
+        else
+            return null;
     }
 
     public void setPath_md5(String path_md5) {
@@ -93,7 +105,10 @@ public class PictureResource {
     }
 
     public String getProject() {
-        return project;
+        if(!(project == null || project.equals("")))
+            return project;
+        else
+            return null;
     }
 
     public void setProject(String project) {
@@ -101,7 +116,10 @@ public class PictureResource {
     }
 
     public String getMark_type() {
-        return mark_type;
+        if(!(mark_type == null || mark_type.equals("")))
+            return mark_type;
+        else
+            return null;
     }
 
     public void setMark_type(String mark_type) {
@@ -110,7 +128,10 @@ public class PictureResource {
 
 
     public String getSence() {
-        return sence;
+        if(!(sence == null || sence.equals("")))
+            return sence;
+        else
+            return null;
     }
 
     public void setSence(String sence) {
@@ -142,7 +163,10 @@ public class PictureResource {
     }
 
     public String getMark_class() {
-        return mark_class;
+        if(!(mark_class == null || mark_class.equals("")))
+            return mark_class;
+        else
+            return null;
     }
 
     public void setMark_class(String mark_class) {
@@ -150,7 +174,10 @@ public class PictureResource {
     }
 
     public String getMark_stuff_class() {
-        return mark_stuff_class;
+        if(!(mark_stuff_class == null || mark_class.equals("")))
+            return mark_stuff_class;
+        else
+            return null;
     }
 
     public void setMark_stuff_class(String mark_stuff_class) {
@@ -158,7 +185,10 @@ public class PictureResource {
     }
 
     public String getMark_stuff_desc() {
-        return mark_stuff_desc;
+        if(!(mark_stuff_desc == null || mark_stuff_desc.equals("")))
+            return mark_stuff_desc;
+        else
+            return null;
     }
 
     public void setMark_stuff_desc(String mark_stuff_desc) {
@@ -228,8 +258,7 @@ public class PictureResource {
                 ", FormatMarkStartTime='" + FormatMarkStartTime + '\'' +
                 '}';
     }
-
-
+    
     public boolean isEmpty(){
         return this.mark_class==null&&this.mark_type==null
                 &&this.sence==null&&this.mark_stuff_class==null&&this.mark_stuff_desc==null

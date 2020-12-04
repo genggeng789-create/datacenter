@@ -1,10 +1,7 @@
 package deepblueai.quximart.service;
 
-import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.fastjson.JSON;
 import deepblueai.quximart.entity.ConsumerPurchaseRates;
-import deepblueai.quximart.entity.DashDeviceStatus;
-import deepblueai.quximart.tools.Tools;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +9,8 @@ import org.springframework.stereotype.Service;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
+
+import static deepblueai.quximart.tools.Tools.getLastDate;
 
 @Slf4j
 @Service
@@ -21,12 +20,17 @@ public class MerchantStatistic {
     {
         if(consumerPurchaseRates.getMerchantId() != null)
         {
-            sql = sql + "and merchant_id = '" + consumerPurchaseRates.getMerchantId() + "'";
+            sql = sql + " and merchant_id = '" + consumerPurchaseRates.getMerchantId() + "'";
         }
 
-        if(consumerPurchaseRates.getRegisterTime() != null)
+        if(consumerPurchaseRates.getStartDate() != null)
         {
-            sql = sql + "and register_time = cast('" + consumerPurchaseRates.getRegisterTime() + "' as timestamp)";
+            sql = sql + " and register_time >= '" + consumerPurchaseRates.getStartDate() + "'";
+        }
+
+        if(consumerPurchaseRates.getEndDate() != null)
+        {
+            sql = sql + " and register_time <= '" + consumerPurchaseRates.getEndDate() + "'";
         }
         return sql;
     }
@@ -34,32 +38,35 @@ public class MerchantStatistic {
     @Autowired
     DataSource dataSource;
 
-    public ArrayList<ConsumerPurchaseRates> QueryMerchantRates(ConsumerPurchaseRates dds) throws SQLException {
+    public ArrayList<ConsumerPurchaseRates> QueryMerchantRates(ConsumerPurchaseRates dds) throws Exception {
         ArrayList<ConsumerPurchaseRates> list = new ArrayList<>();
         Connection connection = dataSource.getConnection();
-        String sql = "select * from hive.quixmart_analysis.consumer_purchase_rates where 1=1 ";
+        if(dds.getKeyType() == null || dds.getStartDate() == null || dds.getEndDate() == null)
+        {
+            throw new Exception("缺少参数,请注意!");
+        }
+        String sql = "select if_first,if_second,"+dds.getKeyType()+",register_count from hive.quixmart_analysis.consumer_purchase_rates where  1=1";
         sql = join_condition(sql,dds);
+        sql += " and batch = '" + getLastDate() + "'";
         log.info(sql);
-        //sql += " limit 5";
+
         PreparedStatement prepareStatement = connection.prepareStatement(sql);
         ResultSet resultSet = prepareStatement.executeQuery();
+
         while (resultSet.next()) {
             ConsumerPurchaseRates consumerPurchaseRates = new ConsumerPurchaseRates();
-
-            consumerPurchaseRates.setRegisterTime(Tools.TimestampToString(resultSet.getTimestamp(1),"yyyy/MM/dd"));
-            consumerPurchaseRates.setMerchantId(resultSet.getString(2));
-            consumerPurchaseRates.setRateOf1stWithin0(resultSet.getDouble(3));
-            consumerPurchaseRates.setRateOf1st(resultSet.getDouble(4));
-            consumerPurchaseRates.setRateOf2ndWithin0(resultSet.getDouble(5));
-            consumerPurchaseRates.setRateOf2ndWithin7(resultSet.getDouble(6));
-            consumerPurchaseRates.setRateOf2ndWithin14(resultSet.getDouble(7));
-            consumerPurchaseRates.setRateOf2ndwithin21(resultSet.getDouble(8));
-            consumerPurchaseRates.setRegisterCount(resultSet.getInt(9));
-            consumerPurchaseRates.setIfFirst(resultSet.getInt(10));
-            consumerPurchaseRates.setIfSecond(resultSet.getInt(11));
+            consumerPurchaseRates = fillValue(dds,resultSet);
+            consumerPurchaseRates.setRegisterCount(resultSet.getInt("register_count"));
+            consumerPurchaseRates.setIfFirst(resultSet.getInt("if_first"));
+            consumerPurchaseRates.setIfSecond(resultSet.getInt("if_second"));
             consumerPurchaseRates = JSON.parseObject(consumerPurchaseRates.toJson(), ConsumerPurchaseRates.class);
             list.add(consumerPurchaseRates);
         }
         return list;
+    }
+
+    private ConsumerPurchaseRates fillValue(ConsumerPurchaseRates consumerPurchaseRates,ResultSet resultSet) throws SQLException {
+        consumerPurchaseRates.setRateOf1stWithin0(resultSet.getDouble(consumerPurchaseRates.getKeyType()));
+        return consumerPurchaseRates;
     }
 }
