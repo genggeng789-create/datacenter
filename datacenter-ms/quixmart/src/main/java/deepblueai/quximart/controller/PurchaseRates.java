@@ -22,7 +22,7 @@ public class PurchaseRates {
     MerchantStatistic merchantStatistic;
 
     @GetMapping(value = {"/rates"})
-    public JSON getDeviceStatusJson(ConsumerPurchaseRates model) throws SQLException {
+    public JSON getMerchantRatesJson(ConsumerPurchaseRates model){
         StringBuffer sb = null;
         try {
             //查询的结果集转换为JSON格式
@@ -30,7 +30,7 @@ public class PurchaseRates {
             //查询的记录总数
             sb = new StringBuffer(JSON.toJSONString(array));
             //拼接为 {total:xx,list:{xxxxx}}格式的结果集
-            sb.insert(0,"{DeviceStatusList:").append(",message: null,success:true,time:"+ Calendar.getInstance().getTimeInMillis()+"}");
+            sb.insert(0,"{MerchantRatesList:").append(",message: null,success:true,time:"+ Calendar.getInstance().getTimeInMillis()+"}");
 //        log.info("user name from token {}",SecurityContextUtils.getJWTToken());
 //        log.info("user name from token {}",SecurityContextUtils.getUsername());
 
