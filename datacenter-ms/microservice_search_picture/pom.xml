@@ -116,25 +116,22 @@
                 <version>2.1.5.RELEASE</version>
             </plugin>
             <!--<plugin>-->
-            <!--<groupId>com.spotify</groupId>-->
-            <!--<artifactId>docker-maven-plugin</artifactId>-->
-            <!--<version>1.0.0</version>-->
-            <!--<configuration>-->
-            <!--<imageName>datacenter/eureka</imageName>-->
-            <!--<imageTags>-->
-            <!--<imageTag>${project.version}</imageTag>-->
-            <!--</imageTags>-->
-            <!--<baseImage>jdk1.8</baseImage>-->
-            <!--<entryPoint>["sh", "-c", "java -jar /${project.build.finalName}.jar &#45;&#45;spring.config.name=application-$CE"]</entryPoint>-->
-            <!--<resources>-->
-            <!--<resource>-->
-            <!--<targetPath>/</targetPath>-->
-            <!--<directory>${project.build.directory}</directory>-->
-            <!--<include>${project.build.finalName}.jar</include>-->
-            <!--</resource>-->
-            <!--</resources>-->
-            <!--<dockerHost>http://10.16.32.172:2375</dockerHost>-->
-            <!--</configuration>-->
+                <!--<groupId>com.spotify</groupId>-->
+                <!--<artifactId>docker-maven-plugin</artifactId>-->
+                <!--<version>0.4.13</version>-->
+                <!--<configuration>-->
+                    <!--<imageName>search_picture</imageName>-->
+                    <!--<baseImage>jdk1.8</baseImage>-->
+                    <!--<entryPoint>["sh", "-c", "java -jar /${project.build.finalName}.jar &#45;&#45;spring.config.name=application-$CE"]</entryPoint>-->
+                    <!--<resources>-->
+                        <!--<resource>-->
+                            <!--<targetPath>/</targetPath>-->
+                            <!--<directory>${project.build.directory}</directory>-->
+                            <!--<include>${project.build.finalName}.jar</include>-->
+                        <!--</resource>-->
+                    <!--</resources>-->
+                    <!--<dockerHost>http://10.16.32.172:2375</dockerHost>-->
+                <!--</configuration>-->
             <!--</plugin>-->
             <plugin>
                 <groupId>com.spotify</groupId>
