@@ -174,7 +174,7 @@ public class PictureResource {
     }
 
     public String getMark_stuff_class() {
-        if(!(mark_stuff_class == null || mark_class.equals("")))
+        if(!(mark_stuff_class == null || mark_stuff_class.equals("")))
             return mark_stuff_class;
         else
             return null;
