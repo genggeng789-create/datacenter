@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
 
+import static deepblueai.quximart.tools.Tools.getLastDate;
+
 @Slf4j
 @Service
 public class DeviceStatistic {
@@ -29,6 +31,7 @@ public class DeviceStatistic {
             throw new Exception("缺少设备号");
         }
         String sql = "select * from hive.quixmart_analysis.dash_device_status where device_code= '" + dds.getDeviceCode() + "'";
+        sql += " and batch = '" + getLastDate() + "'";
 
         PreparedStatement prepareStatement = connection.prepareStatement(sql);
         ResultSet resultSet = prepareStatement.executeQuery();

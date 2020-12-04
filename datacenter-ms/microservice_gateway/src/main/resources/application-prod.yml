@@ -11,7 +11,7 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://10.16.32.213:8888/eureka ,http://10.16.32.212:8888/eureka
+      defaultZone: http://10.16.32.213:8888/eureka,http://10.16.32.212:8888/eureka
   instance:
     prefer-ip-address: true
 
