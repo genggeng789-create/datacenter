@@ -14,6 +14,10 @@ public class ConsumerPurchaseRates {
     int ifFirst;
     int ifSecond;
 
+    String startDate;
+    String endDate;
+    String keyType;
+
     public String getRegisterTime() {
         return registerTime;
     }
@@ -110,20 +114,44 @@ public class ConsumerPurchaseRates {
         this.ifSecond = ifSecond;
     }
 
+    public String getKeyType() {
+        return keyType;
+    }
+
+    public void setKeyType(String keyType) {
+        this.keyType = keyType;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
     public String toJson() {
         return "{" +
-                "registerTime:\"" + registerTime +"\"" +
-                ", merchantId:\"" + merchantId + "\"" +
-                ", rateOf1stWithin0:" + rateOf1stWithin0 +"" +
-                ", rateOf1st:" + rateOf1st +"" +
-                ", rateOf2ndWithin0:" + rateOf2ndWithin0 +"" +
-                ", rateOf2ndWithin7:" + rateOf2ndWithin7 +"" +
-                ", rateOf2ndWithin14:" + rateOf2ndWithin14 +"" +
-                ", rateOf2ndwithin21:" + rateOf2ndwithin21 +"" +
-                ", rateOf2nd:" + rateOf2nd +"" +
-                ", registerCount:" + registerCount +
-                ", ifFirst:" + ifFirst +
-                ", ifSecond:" + ifSecond +
+                "register_time:\"" + registerTime +"\"" +
+                ", merchant_id:\"" + merchantId + "\"" +
+                ", rate_of_1st_within0:" + rateOf1stWithin0 +
+                ", rate_of_1st:" + rateOf1st +
+                ", rate_of_2nd_within_0:" + rateOf2ndWithin0 +
+                ", rate_of_2nd_within_7:" + rateOf2ndWithin7 +
+                ", rate_of_2nd_within_14:" + rateOf2ndWithin14 +
+                ", rate_of_2nd_within_21:" + rateOf2ndwithin21 +
+                ", rate_of_2nd:" + rateOf2nd +
+                ", register_count:" + registerCount +
+                ", if_first:" + ifFirst +
+                ", if_second:" + ifSecond +
                 '}';
     }
 }
