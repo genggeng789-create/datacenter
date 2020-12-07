@@ -24,7 +24,7 @@ export function getKeycloakOptions() {
       url = 'https://accounts-internal.deepblueai.com/auth';
       realm = 'uat';
     } else {
-      url = 'https://accounts-internal.deepblueai.com/auth';
+      url = 'https://accounts.deepblueai.com/auth';
       realm = 'prod';
     }
   }

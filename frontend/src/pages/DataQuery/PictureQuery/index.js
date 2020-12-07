@@ -32,7 +32,6 @@ const PictureQuery = () => {
   const showImg = (record) => {
     console.log('&&&', record['demo_photo_list']);
     const imgarr = record['demo_photo_list'];
-    // const imgarr = JSON.parse(arr)
     if (imgarr.length > 0) {
       imgarr.forEach((e, index) => {
         imgarr[index] = `${getUrl()}/api/oss-access/download?fileName=${e}&&path=${
@@ -77,13 +76,11 @@ const PictureQuery = () => {
       title: '标注物分类',
       dataIndex: 'mark_stuff_class',
       align: 'center',
-      // valueEnum: markStuffClassArr
     },
     {
       title: '标注物描述',
       dataIndex: 'mark_stuff_desc',
       align: 'center',
-      // valueEnum: markStuffDescArr
     },
     {
       title: '样本数量',
