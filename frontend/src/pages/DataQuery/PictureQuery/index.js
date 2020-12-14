@@ -8,6 +8,7 @@ import { markType, markClassArr, markTypeArr } from '@/utils/dataQuery';
 import { getUrl } from '@/utils/utils';
 import ImgCard from './ImgCard';
 import styles from './index.less';
+import { cloneDeep } from 'lodash';
 
 const markStuffClassArr = {
   0: '标注物类别0',
@@ -30,8 +31,7 @@ const PictureQuery = () => {
   const [cardVisible, setCardVisible] = useState(false);
 
   const showImg = (record) => {
-    console.log('&&&', record['demo_photo_list']);
-    const imgarr = record['demo_photo_list'];
+    const imgarr = cloneDeep(record['demo_photo_list']);
     if (imgarr.length > 0) {
       imgarr.forEach((e, index) => {
         imgarr[index] = `${getUrl()}/api/oss-access/download?fileName=${e}&&path=${
