@@ -1,4 +1,4 @@
-package com.deepblue.searchPicture.tools;
+package com.deepblue.ossAccess.tools;
 
 import java.io.*;
 import java.security.MessageDigest;

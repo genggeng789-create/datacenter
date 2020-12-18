@@ -5,11 +5,13 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.deepblue.searchPicture.entity.PictureResource;
 import com.deepblue.searchPicture.service.BoolQueryPictureService;
+import com.deepblue.searchPicture.service.ExtractPictureResourceService;
 import com.deepblue.searchPicture.tools.SecurityContextUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -19,13 +21,8 @@ public class PictureSearchController {
 
     @Autowired
     BoolQueryPictureService boolQueryPictureService;
-    //@ResponseBody
-//    @RequestMapping(value={"searchRes"}, method= RequestMethod.GET)
-//    public String getPictureResourceList(PictureResource model) {
-//        Iterator<PictureResource> it = boolQueryPictureService.boolQueryPictrue(model).listIterator();
-//        return Tools.createJSONArray(it);
-//    }
-
+    @Autowired
+    ExtractPictureResourceService extractPictureResourceService;
     //@CrossOrigin                     //解决跨域请求问题
     @GetMapping(value = {"searchRes"})
     public JSON getPictureResourceList1(PictureResource model) {
@@ -47,6 +44,12 @@ public class PictureSearchController {
     @GetMapping(value = {"searchRes1"})
     public List<PictureResource> getPictureResourceList(PictureResource model) {
         return boolQueryPictureService.boolQueryPictrue(model);
+    }
+
+    @GetMapping(value = {"fillPictureResource"})
+    public String pictureResourceFilled(@RequestParam("lineNumber") int lineNumber)  {
+        String temp = "/data/bigdata/ftpdata/resultRecord.txt";
+        return "Line"+lineNumber+": " + extractPictureResourceService.process(lineNumber,temp) +" success";
     }
 
 }

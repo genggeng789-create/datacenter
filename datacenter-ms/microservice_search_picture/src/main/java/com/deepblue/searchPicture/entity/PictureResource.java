@@ -24,6 +24,8 @@ public class PictureResource {
     String FormatMarkStartTime;  //标注开始时间(格式化的)
     String start_markStartTime;
     String end_markStartTime;
+    String local_file_path;
+    String zip_file_path;
     int pageNum;
     int pageSize;
 
@@ -203,6 +205,22 @@ public class PictureResource {
 
     public void setEnd_markStartTime(String end_markStartTime) {
         this.end_markStartTime = end_markStartTime;
+    }
+
+    public String getLocal_file_path() {
+        return local_file_path;
+    }
+
+    public void setLocal_file_path(String local_file_path) {
+        this.local_file_path = local_file_path;
+    }
+
+    public String getZip_file_path() {
+        return zip_file_path;
+    }
+
+    public void setZip_file_path(String zip_file_path) {
+        this.zip_file_path = zip_file_path;
     }
 
     @Override
