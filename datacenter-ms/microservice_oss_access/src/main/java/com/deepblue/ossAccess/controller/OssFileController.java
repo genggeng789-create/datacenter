@@ -23,11 +23,17 @@ public class OssFileController {
         return ossAccessService.Download(res,fileName,path);
     }
 
+//    @RequestMapping("/upload")
+//    @ResponseBody
+//    public String uploadFile(@RequestParam("fileNames") String fileNames,@RequestParam("path") String prefix,@RequestParam("filePath") String filePath){
+//        return ossAccessService.uploadFile(filePath,fileNames,prefix);
+//    }
+
     @RequestMapping("/upload")
     @ResponseBody
-    public String uploaddFile() throws IOException {
-        String prefix="E16CCEC1E56FA4152E4F8191B0746000";
-        return ossAccessService.uploadFile(prefix);
+    public String uploadFile(@RequestParam("temp") String fileNames){
+        System.out.println(fileNames);
+        return ossAccessService.uploadFile(fileNames);
     }
 
     //文件下载相关代码

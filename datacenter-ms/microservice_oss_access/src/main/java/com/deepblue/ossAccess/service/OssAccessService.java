@@ -1,14 +1,17 @@
 package com.deepblue.ossAccess.service;
 
+import com.alibaba.fastjson.JSONArray;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectResult;
 import com.amazonaws.services.s3.model.S3Object;
 import com.deepblue.ossAccess.configure.OssProperties;
+import com.deepblue.ossAccess.tools.Tools;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -23,25 +26,24 @@ public class OssAccessService {
 
     @Autowired
     OssProperties ossProperties;
-
-    public String uploadFile(String path_md5)
+    //fileNames是$$$分隔的字符串，文件名的JSONArray数组$$$文件的存储路径$$$文件的OSS路径，一般是md5格式的字符串
+    public String uploadFile(String fileNames)
     {
-        String files [] = {
-                "1601485563_left_0200.jpg",
-                "1601485563_left_0250.jpg",
-                "1601485563_left_0275.jpg",
-                "1601485563_left_0300.jpg",
-                "1601485563_left_0325.jpg",
-                "1601485563_left_0350.jpg",
-                "1601485563_left_0375.jpg",
-                "1601485563_left_0400.jpg",
-                "1601485563_left_0425.jpg",
-                "1601485563_left_0450.jpg"
-        };
-        String path = "C:\\Users\\tuomy\\Downloads\\矿车道路-end\\矿车道路-end\\";
-        for(String file : files)
+        try {
+            fileNames = java.net.URLDecoder.decode(fileNames,"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        String [] line = fileNames.split("\\$\\$\\$");
+        String filePath = line[2];
+        String filesList = line[0];
+        String ftpPath_md5 = line[1];
+        JSONArray jsonArray = JSONArray.parseArray(filesList);
+        for(Object s : jsonArray)
         {
-            uploadFile2(path + file,path_md5);
+            System.out.println(filePath + s);
+            System.out.println(ftpPath_md5);
+            uploadFile2(filePath + s,ftpPath_md5);
         }
         return "upload success";
     }
