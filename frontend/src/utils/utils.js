@@ -2,7 +2,6 @@ import { parse } from 'querystring';
 import * as Keycloak from 'keycloak-js';
 import { getDvaApp } from 'umi';
 import pathRegexp from 'path-to-regexp';
-import moment from 'moment';
 
 // keycloak配置
 export function getKeycloakOptions() {
@@ -13,7 +12,7 @@ export function getKeycloakOptions() {
   if (hostStr) {
     if (hostStr.toLowerCase().startsWith('localhost')) {
       url = 'https://accounts-internal.deepblueai.com/auth';
-      realm = 'dev';
+      realm = 'test';
     } else if (hostStr.toLowerCase().startsWith('dev-')) {
       url = 'https://accounts-internal.deepblueai.com/auth';
       realm = 'dev';
