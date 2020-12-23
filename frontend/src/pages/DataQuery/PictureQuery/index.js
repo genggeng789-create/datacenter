@@ -10,20 +10,6 @@ import ImgCard from './ImgCard';
 import styles from './index.less';
 import { cloneDeep } from 'lodash';
 
-const markStuffClassArr = {
-  0: '标注物类别0',
-  1: '标注物类别1',
-  2: '标注物类别2',
-  3: '标注物类别3',
-};
-
-const markStuffDescArr = {
-  0: '标注物描述0',
-  1: '标注物描述1',
-  2: '标注物描述2',
-  3: '标注物描述3',
-};
-
 const PictureQuery = () => {
   const actionRef = useRef();
   const [currentImg, setCurrentImg] = useState('');
@@ -31,8 +17,13 @@ const PictureQuery = () => {
   const [cardVisible, setCardVisible] = useState(false);
 
   const showImg = (record) => {
+    setImgList([]);
+    setCurrentImg('');
     const imgarr = cloneDeep(record['demo_photo_list']);
-    if (imgarr.length > 0) {
+    if (imgarr.length <= 0) {
+      message.info('暂无照片');
+      return;
+    } else {
       imgarr.forEach((e, index) => {
         imgarr[index] = `${getUrl()}/api/oss-access/download?fileName=${e}&&path=${
           record.path_md5
@@ -40,10 +31,8 @@ const PictureQuery = () => {
       });
       setImgList(imgarr);
       setCurrentImg(imgarr[0]);
-      setCardVisible(true);
-    } else {
-      message.info('暂无照片');
     }
+    setCardVisible(true);
   };
 
   const columns = [
@@ -127,6 +116,7 @@ const PictureQuery = () => {
       ],
     },
   ];
+
   return (
     <PageHeaderWrapper>
       <ProTable
