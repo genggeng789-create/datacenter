@@ -17,8 +17,6 @@ const PictureQuery = () => {
   const [cardVisible, setCardVisible] = useState(false);
 
   const showImg = (record) => {
-    setImgList([]);
-    setCurrentImg('');
     const imgarr = cloneDeep(record['demo_photo_list']);
     if (imgarr.length <= 0) {
       message.info('暂无照片');
@@ -31,8 +29,8 @@ const PictureQuery = () => {
       });
       setImgList(imgarr);
       setCurrentImg(imgarr[0]);
+      setCardVisible(true);
     }
-    setCardVisible(true);
   };
 
   const columns = [
@@ -160,6 +158,7 @@ const PictureQuery = () => {
       <ImgCard
         currentImg={currentImg}
         imgList={imgList}
+        setImgList={setImgList}
         setCurrentImg={setCurrentImg}
         cardVisible={cardVisible}
         setCardVisible={setCardVisible}
