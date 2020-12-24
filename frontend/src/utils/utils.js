@@ -12,7 +12,7 @@ export function getKeycloakOptions() {
   if (hostStr) {
     if (hostStr.toLowerCase().startsWith('localhost')) {
       url = 'https://accounts-internal.deepblueai.com/auth';
-      realm = 'test';
+      realm = 'dev';
     } else if (hostStr.toLowerCase().startsWith('dev-')) {
       url = 'https://accounts-internal.deepblueai.com/auth';
       realm = 'dev';
