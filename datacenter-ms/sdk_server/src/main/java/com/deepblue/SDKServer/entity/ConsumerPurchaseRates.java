@@ -1,4 +1,4 @@
-package deepblueai.quximart.entity;
+package com.deepblue.SDKServer.entity;
 
 import lombok.Data;
 

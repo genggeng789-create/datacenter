@@ -1,21 +1,28 @@
-package deepblueai.quximart.service;
+package com.deepblue.SDKServer.service;
 
 import com.alibaba.fastjson.JSON;
-import deepblueai.quximart.entity.DashDeviceStatus;
+import com.alibaba.fastjson.JSONObject;
+import com.deepblue.SDKServer.common.BaseResponse;
+import com.deepblue.SDKServer.common.PageModel;
+import com.deepblue.SDKServer.entity.DashDeviceStatus;
+import com.deepblue.SDKServer.entity.User;
+import com.deepblue.SDKServer.sys.SysUserDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.*;
-import java.util.ArrayList;
 import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
-import static deepblueai.quximart.tools.Tools.getLastDate;
+import static com.deepblue.SDKServer.tools.Tools.getLastDate;
 
 @Slf4j
 @Service
-public class DeviceStatistic {
-
+public class DeviceStatistic implements QueryService<DashDeviceStatus> {
 
     @Autowired
     DataSource dataSource;
@@ -42,5 +49,21 @@ public class DeviceStatistic {
             list.add(dashDeviceStatus);
         }
         return list;
+    }
+
+    @Override
+    public BaseResponse<PageModel<List<DashDeviceStatus>>> queryList(SysUserDTO dto){
+        List<DashDeviceStatus> list = null;
+        int status = 0;
+        String errorMsg = "success";
+        try {
+            list = QueryDeviceStatus(JSONObject.toJavaObject(dto.getQueryCondition(), DashDeviceStatus.class));
+        } catch (Exception e) {
+            errorMsg = "fail, " + e.getMessage();
+            e.printStackTrace();
+            status = -1;
+        }
+        PageModel<List<DashDeviceStatus>> pageModel = PageModel.<List<DashDeviceStatus>>builder().data(list).pageIndex(dto.getPageIndex()).pageSize(list.size()).build();
+        return new BaseResponse<PageModel<List<DashDeviceStatus>>>(pageModel,status,errorMsg);
     }
 }
