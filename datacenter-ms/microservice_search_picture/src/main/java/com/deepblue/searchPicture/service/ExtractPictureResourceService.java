@@ -12,16 +12,11 @@ import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.*;
-import java.net.URI;
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -66,7 +61,6 @@ public class ExtractPictureResourceService extends ExcelUtil{
 //        map1.put("batch_id",new Position(26,2));
 //        map1.put("picture_number",new Position(27,2));
 
-        //map2.put("","package_name");
         map2.put("项目名称","project");
         map2.put("标注类别","mark_class");
         map2.put("标注形式","mark_type");

@@ -3,6 +3,9 @@ server:
 spring:
   application:
     name: microservice-user
+  profiles:
+    active: dev
+
   datasource:
     url: jdbc:mysql://10.16.32.172:3307/springcloud?userUnicode=true&characterEncoding=UTF8&useSSL=false&zeroDateTimeBehavior=convertToNull
     driver-class-name: com.mysql.jdbc.Driver
@@ -12,6 +15,7 @@ spring:
     show-sql: true  #是否打印sql语句
     generate-ddl: true  #是否自动建表
     database: mysql  #数据库类型
+
 eureka:
   client:
     fetch-registry: true  #作为客户端需要从eureka获取信息
@@ -20,3 +24,5 @@ eureka:
       defaultZone: http://10.16.32.172:8888/eureka,http://10.16.32.172:9999/eureka
   instance:
     prefer-ip-address: true  #优先使用该服务的IP地址注册到eureka，在生产环境建议改为true
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 90

@@ -1,10 +1,10 @@
 package com.deepblueai.user.dao;
 
-import com.deepblueai.user.entity.User;
+import com.deepblueai.user.entity.SDKUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /*
 * 用户Dao
 * */
-public interface UserDao extends JpaRepository<User, Integer> {
+public interface UserDao extends JpaRepository<SDKUser, Integer> {
 }

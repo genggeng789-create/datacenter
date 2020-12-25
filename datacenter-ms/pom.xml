@@ -17,6 +17,7 @@
         <module>microservice_oss_access</module>
         <module>download_package</module>
         <module>quixmart</module>
+        <module>sdk_server</module>
     </modules>
 
     <parent>
