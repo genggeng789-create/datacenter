@@ -245,11 +245,21 @@ public class ExtractPictureResourceService extends ExcelUtil{
          File[] files = new File(unzipFold).listFiles();
          //图片的路径
          int count = 0;
+         String picPath = null;
          for(File file : files){
              if(file.isDirectory()){
                  getDemoPictures(file.getAbsolutePath(),arrayList,absolutePath);
              }
              else
+             {
+                 picPath = file.getParent();
+                 break;
+             }
+         }
+         if(picPath != null && arrayList.size()==0)
+         {
+             File[] files1 = new File(picPath).listFiles();
+             for(File file : files1)
              {
                  //取10张抽样图片
                  if(count < 10 && (arrayList.size() < 10))
@@ -264,10 +274,12 @@ public class ExtractPictureResourceService extends ExcelUtil{
                  }
                  else
                  {
+
                      break;
                  }
              }
          }
+
          return true;
      }
     /*
