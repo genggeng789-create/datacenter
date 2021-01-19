@@ -10,7 +10,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>SDKServer</artifactId>
-
+    <properties>
+        <dockerfile.tag>1.0</dockerfile.tag>
+        <spring.profiles.active>dev</spring.profiles.active>
+    </properties>
 
     <dependencyManagement>
         <dependencies>
@@ -160,53 +163,53 @@
     </dependencies>
 
     <build>
-        <finalName>search_picture</finalName>
+        <finalName>sdk_server</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.1.5.RELEASE</version>
             </plugin>
-            <!--<plugin>-->
-            <!--<groupId>com.spotify</groupId>-->
-            <!--<artifactId>docker-maven-plugin</artifactId>-->
-            <!--<version>0.4.13</version>-->
-            <!--<configuration>-->
-            <!--<imageName>search_picture</imageName>-->
-            <!--<baseImage>jdk1.8</baseImage>-->
-            <!--<entryPoint>["sh", "-c", "java -jar /${project.build.finalName}.jar &#45;&#45;spring.config.name=application-$CE"]</entryPoint>-->
-            <!--<resources>-->
-            <!--<resource>-->
-            <!--<targetPath>/</targetPath>-->
-            <!--<directory>${project.build.directory}</directory>-->
-            <!--<include>${project.build.finalName}.jar</include>-->
-            <!--</resource>-->
-            <!--</resources>-->
-            <!--<dockerHost>http://10.16.32.172:2375</dockerHost>-->
-            <!--</configuration>-->
-            <!--</plugin>-->
             <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>1.3.6</version>
-                <configuration>
-                    <repository>${docker.image.prefix}/${project.artifactId}-${spring.profiles.active}
-                    </repository>
-                    <tag>${dockerfile.tag}</tag>
-                    <buildArgs>
-                        <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
-                    </buildArgs>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>default</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>build</goal>
-                        </goals>
-                    </execution>
-                </executions>
+            <groupId>com.spotify</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <version>0.4.13</version>
+            <configuration>
+            <imageName>sdk_server</imageName>
+            <baseImage>jdk1.8</baseImage>
+            <entryPoint>["sh", "-c", "java -jar /${project.build.finalName}.jar --spring.config.name=application-$CE"]</entryPoint>
+            <resources>
+            <resource>
+            <targetPath>/</targetPath>
+            <directory>${project.build.directory}</directory>
+            <include>${project.build.finalName}.jar</include>
+            </resource>
+            </resources>
+            <dockerHost>http://10.16.32.172:2375</dockerHost>
+            </configuration>
             </plugin>
+            <!--<plugin>-->
+                <!--<groupId>com.spotify</groupId>-->
+                <!--<artifactId>dockerfile-maven-plugin</artifactId>-->
+                <!--<version>1.3.6</version>-->
+                <!--<configuration>-->
+                    <!--<repository>${docker.image.prefix}/${project.artifactId}-${spring.profiles.active}-->
+                    <!--</repository>-->
+                    <!--<tag>${dockerfile.tag}</tag>-->
+                    <!--<buildArgs>-->
+                        <!--<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>-->
+                    <!--</buildArgs>-->
+                <!--</configuration>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>default</id>-->
+                        <!--<phase>install</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>build</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 

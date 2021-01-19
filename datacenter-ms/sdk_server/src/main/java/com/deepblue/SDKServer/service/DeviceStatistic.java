@@ -7,6 +7,7 @@ import com.deepblue.SDKServer.common.PageModel;
 import com.deepblue.SDKServer.entity.DashDeviceStatus;
 import com.deepblue.SDKServer.entity.User;
 import com.deepblue.SDKServer.sys.SysUserDTO;
+import com.deepblue.SDKServer.tools.Tools;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,12 +36,12 @@ public class DeviceStatistic implements QueryService<DashDeviceStatus> {
         }
         String sql = "select * from hive.quixmart_analysis.dash_device_status where device_code= '" + dds.getDeviceCode() + "'";
         sql += " and batch = '" + getLastDate() + "'";
-
+        log.info(sql);
         PreparedStatement prepareStatement = connection.prepareStatement(sql);
         ResultSet resultSet = prepareStatement.executeQuery();
         while (resultSet.next()) {
             DashDeviceStatus dashDeviceStatus = new DashDeviceStatus();
-
+            log.info(resultSet.getString(2));
             dashDeviceStatus.setDeviceCode(resultSet.getString(1));
             dashDeviceStatus.setProblemStatus1(resultSet.getString(2));
             dashDeviceStatus.setProblemStatus2(resultSet.getString(3));
