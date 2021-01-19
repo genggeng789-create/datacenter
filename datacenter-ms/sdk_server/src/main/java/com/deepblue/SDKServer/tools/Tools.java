@@ -118,4 +118,10 @@ public class Tools {
         return getStringDate(ca.getTime(),"yyyy-MM-dd");
     }
 
+//    public static String toUtf8(String str) throws UnsupportedEncodingException {
+//        //return new String(str.getBytes("UTF-8"),"UTF-8");
+//        //return new String(str.getBytes("GB2312"),"8859_1");
+//        return new String(str.getBytes("UTF-8"), "ISO8859_1");
+//    }
+
 }
