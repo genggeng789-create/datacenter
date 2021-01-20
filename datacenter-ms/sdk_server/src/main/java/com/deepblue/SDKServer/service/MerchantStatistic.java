@@ -49,34 +49,73 @@ public class MerchantStatistic implements QueryService<ConsumerPurchaseRates> {
 
     public ArrayList<ConsumerPurchaseRates> QueryMerchantRates(ConsumerPurchaseRates dds) throws Exception {
         ArrayList<ConsumerPurchaseRates> list = new ArrayList<>();
-        Connection connection = dataSource.getConnection();
-        if(dds.getKeyType() == null || dds.getStartDate() == null || dds.getEndDate() == null)
-        {
-            throw new Exception("缺少参数,请注意!");
+        Connection connection = null;
+        ResultSet resultSet = null;
+        PreparedStatement prepareStatement = null;
+
+        try {
+            connection = dataSource.getConnection();
+            if(dds.getKeyType() == null || dds.getStartDate() == null || dds.getEndDate() == null)
+            {
+                throw new Exception("缺少参数,请注意!");
+            }
+            String sql = "select register_time,if_first,if_second,"+dds.getKeyType()+",register_count from hive.quixmart_analysis.consumer_purchase_rates where  1=1";
+            sql = join_condition(sql,dds);
+            sql += " and batch = '" + getLastDate() + "' order by register_time";
+            log.info(sql);
+
+            prepareStatement = connection.prepareStatement(sql);
+            resultSet = prepareStatement.executeQuery();
+
+            while (resultSet.next()) {
+                ConsumerPurchaseRates consumerPurchaseRates = new ConsumerPurchaseRates();
+                consumerPurchaseRates = fillValue(dds,resultSet);
+                consumerPurchaseRates.setRegisterCount(resultSet.getInt("register_count"));
+                consumerPurchaseRates.setIfFirst(resultSet.getInt("if_first"));
+                consumerPurchaseRates.setIfSecond(resultSet.getInt("if_second"));
+                consumerPurchaseRates.setRegisterTime(resultSet.getString("register_time"));
+                consumerPurchaseRates = JSON.parseObject(consumerPurchaseRates.toJson(), ConsumerPurchaseRates.class);
+                list.add(consumerPurchaseRates);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        String sql = "select register_time,if_first,if_second,"+dds.getKeyType()+",register_count from hive.quixmart_analysis.consumer_purchase_rates where  1=1";
-        sql = join_condition(sql,dds);
-        sql += " and batch = '" + getLastDate() + "'";
-        log.info(sql);
-
-        PreparedStatement prepareStatement = connection.prepareStatement(sql);
-        ResultSet resultSet = prepareStatement.executeQuery();
-
-        while (resultSet.next()) {
-            ConsumerPurchaseRates consumerPurchaseRates = new ConsumerPurchaseRates();
-            consumerPurchaseRates = fillValue(dds,resultSet);
-            consumerPurchaseRates.setRegisterCount(resultSet.getInt("register_count"));
-            consumerPurchaseRates.setIfFirst(resultSet.getInt("if_first"));
-            consumerPurchaseRates.setIfSecond(resultSet.getInt("if_second"));
-            consumerPurchaseRates.setRegisterTime(resultSet.getString("register_time"));
-            consumerPurchaseRates = JSON.parseObject(consumerPurchaseRates.toJson(), ConsumerPurchaseRates.class);
-            list.add(consumerPurchaseRates);
+        finally {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            if (prepareStatement != null) {
+                prepareStatement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
         }
         return list;
     }
 
     private ConsumerPurchaseRates fillValue(ConsumerPurchaseRates consumerPurchaseRates,ResultSet resultSet) throws SQLException {
-        consumerPurchaseRates.setRateOf1stWithin0(resultSet.getDouble(consumerPurchaseRates.getKeyType()));
+        if(consumerPurchaseRates.getKeyType().equals("rate_of_1st_within_0")){
+            consumerPurchaseRates.setRateOf1stWithin0(resultSet.getDouble(consumerPurchaseRates.getKeyType()));
+        }
+        if(consumerPurchaseRates.getKeyType().equals("rate_of_1st")) {
+            consumerPurchaseRates.setRateOf1st(resultSet.getDouble(consumerPurchaseRates.getKeyType()));
+        }
+        if(consumerPurchaseRates.getKeyType().equals("rate_of_2nd")) {
+            consumerPurchaseRates.setRateOf2nd(resultSet.getDouble(consumerPurchaseRates.getKeyType()));
+        }
+        if(consumerPurchaseRates.getKeyType().equals("rate_of_2nd_within_0")) {
+            consumerPurchaseRates.setRateOf2ndWithin0(resultSet.getDouble(consumerPurchaseRates.getKeyType()));
+        }
+        if(consumerPurchaseRates.getKeyType().equals("rate_of_2nd_within_7")) {
+            consumerPurchaseRates.setRateOf2ndWithin7(resultSet.getDouble(consumerPurchaseRates.getKeyType()));
+        }
+        if(consumerPurchaseRates.getKeyType().equals("rate_of_2nd_within_14")) {
+            consumerPurchaseRates.setRateOf2ndWithin14(resultSet.getDouble(consumerPurchaseRates.getKeyType()));
+        }
+        if(consumerPurchaseRates.getKeyType().equals("rate_of_2nd_within_21")) {
+            consumerPurchaseRates.setRateOf2ndwithin21(resultSet.getDouble(consumerPurchaseRates.getKeyType()));
+        }
         return consumerPurchaseRates;
     }
 
