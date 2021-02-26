@@ -1,7 +1,9 @@
 package com.deepblueai.user.service;
 
-import com.deepblueai.user.dao.UserDao;
+import com.deepblueai.user.dao.DatacenterUserDao;
+import com.deepblueai.user.entity.DatacenterUser;
 import com.deepblueai.user.entity.SDKUser;
+import com.deepblueai.user.tools.Tools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,55 +13,62 @@ import java.util.List;
 * 用户的业务类
 * */
 @Service
-public class UserService {
+public class DatacenterUserService {
 
 //    @Autowired
 //    private UserRepository userRepository;
 
     @Autowired
-    private UserDao userDao;
+    private DatacenterUserDao datacenterUserDao;
 
     /*
     * 查询所有用户
     * */
-    public List<SDKUser> findAll(){
-        return  userDao.findAll();
+    public List<DatacenterUser> findAll(){
+        return  datacenterUserDao.findAll();
     }
 
     /*
     * 根据Id查询用户
     * */
-    public SDKUser findUserById(Integer id){
-        return userDao.findById(id).get();
+    public DatacenterUser findUserById(Integer id){
+        return datacenterUserDao.findById(id).get();
     }
 
     /*
     * 根据用户名查询用户
     * */
-    public SDKUser getUserByUserName(String userName) {
-        return userDao.findByUserName(userName);
+    public DatacenterUser getUserByUserName(String userName) {
+        return datacenterUserDao.findByUsername(userName);
     }
 
     /*
+     * 根据用户ID查询用户
+     * */
+    public DatacenterUser getUserByUserId(String userId) {
+        return datacenterUserDao.findByUserId(userId);
+    }
+    /*
     * 添加用户
     * */
-    public void addUser(SDKUser user)
+    public void addUser(DatacenterUser user)
     {
-        userDao.save(user);
+        user.setPassword(Tools.MD5(user.getPassword()));
+        datacenterUserDao.save(user);
     }
 
     /*
     * 修改用户
     * */
-    public void update(SDKUser user){  //如果用户Id在数据库中不存在，就变成新增了
-        userDao.save(user);
+    public void update(DatacenterUser user){  //如果用户Id在数据库中不存在，就变成新增了
+        datacenterUserDao.save(user);
     }
 
     /*
     * 删除用户
     * */
     public void delete(Integer id){
-        userDao.deleteById(id);
+        datacenterUserDao.deleteById(id);
     }
 
     //    @Transactional
