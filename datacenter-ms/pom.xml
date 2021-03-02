@@ -16,7 +16,7 @@
         <module>microservice_search_picture</module>
         <module>microservice_oss_access</module>
         <module>download_package</module>
-        <module>quixmart</module>
+        <module>microservice_report</module>
         <module>sdk_server</module>
     </modules>
 

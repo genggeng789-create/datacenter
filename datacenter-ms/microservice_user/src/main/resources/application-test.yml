@@ -7,7 +7,7 @@ spring:
     active: test
 
   datasource:
-    url: jdbc:mysql://10.16.32.172:3307/springcloud?userUnicode=true&characterEncoding=UTF8&useSSL=false&zeroDateTimeBehavior=convertToNull
+    url: jdbc:mysql://10.16.32.172:3307/datacenter?userUnicode=true&characterEncoding=UTF8&useSSL=false&zeroDateTimeBehavior=convertToNull
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: 123456
